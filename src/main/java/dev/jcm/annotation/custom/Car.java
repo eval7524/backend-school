@@ -3,6 +3,8 @@ package dev.jcm.annotation.custom;
 import dev.jcm.annotation.custom.annotation.ModelDescriptionPrint;
 import dev.jcm.annotation.custom.annotation.ModelDescriptionPrints;
 
+import java.time.LocalDate;
+
 public class Car {
     private final String model;
     private final Integer year;
@@ -13,12 +15,12 @@ public class Car {
     }
 
     @ModelDescriptionPrints({
-        @ModelDescriptionPrint(model = "ionic", description = "new model"),
-        @ModelDescriptionPrint(model = "honda", description = "steady seller"),
-        @ModelDescriptionPrint(model = "grandeur", description = "luxury model"),
-        @ModelDescriptionPrint(model = "Avante", description = "compact model"),
-        @ModelDescriptionPrint(model = "Morning", description = "small car"),
-        @ModelDescriptionPrint(model = "SM5", description = "unknown model")
+            @ModelDescriptionPrint(model = "ionic", description = "new model"),
+            @ModelDescriptionPrint(model = "honda", description = "steady seller"),
+            @ModelDescriptionPrint(model = "grandeur", description = "luxury model"),
+            @ModelDescriptionPrint(model = "Avante", description = "compact model"),
+            @ModelDescriptionPrint(model = "Morning", description = "small car"),
+            @ModelDescriptionPrint(model = "SM5", description = "unknown model")
     })
     public String getModel() {
         try {
@@ -40,11 +42,13 @@ public class Car {
         return year;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "model='" + model + '\'' +
-                ", year='" + year + '\'' +
-                '}';
+    //생산된지 5년이 넘었으면 정비가 필요합니다.
+    private boolean isNeedMaintenance() {
+        return LocalDate.of(year, 1, 1).isBefore(LocalDate.now().minusYears(5));
+    }
+
+    public boolean isNeedChangeOil() {
+        // 오일 교체는 1개월 마다 해야함
+        return LocalDate.of(year, 1, 1).isBefore(LocalDate.now().minusMonths(1));
     }
 }
