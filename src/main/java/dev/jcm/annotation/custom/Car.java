@@ -2,9 +2,9 @@ package dev.jcm.annotation.custom;
 
 public class Car {
     private final String model;
-    private final String year;
+    private final Integer year;
 
-    public Car(String model, String year) {
+    public Car(String model, Integer year) {
         this.model = model;
         this.year = year;
     }
@@ -13,7 +13,7 @@ public class Car {
         return model;
     }
 
-    public String getYear() {
+    public Integer getYear() {
         return year;
     }
 
