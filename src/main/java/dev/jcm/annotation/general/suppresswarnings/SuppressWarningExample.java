@@ -11,3 +11,4 @@ public class SuppressWarningExample {
         System.out.println(list.getFirst());
     }
 }
+
